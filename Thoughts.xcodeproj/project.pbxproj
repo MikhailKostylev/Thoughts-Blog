@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F38294627FEF25E00288945 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F38294527FEF25E00288945 /* GoogleService-Info.plist */; };
+		1F38294827FEFD3200288945 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38294727FEFD3200288945 /* User.swift */; };
+		1F38294A27FEFD4E00288945 /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38294927FEFD4E00288945 /* BlogPost.swift */; };
 		1F7CDCB427FE062700369248 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCB327FE062700369248 /* AppDelegate.swift */; };
 		1F7CDCB627FE062700369248 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCB527FE062700369248 /* SceneDelegate.swift */; };
 		1F7CDCB827FE062700369248 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCB727FE062700369248 /* HomeViewController.swift */; };
@@ -27,6 +30,9 @@
 
 /* Begin PBXFileReference section */
 		0E4AFEDDAA59B34E9B601E30 /* Pods-Thoughts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughts.release.xcconfig"; path = "Target Support Files/Pods-Thoughts/Pods-Thoughts.release.xcconfig"; sourceTree = "<group>"; };
+		1F38294527FEF25E00288945 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1F38294727FEFD3200288945 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1F38294927FEFD4E00288945 /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
 		1F7CDCB027FE062700369248 /* Thoughts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thoughts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F7CDCB327FE062700369248 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F7CDCB527FE062700369248 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,12 +87,13 @@
 		1F7CDCB227FE062700369248 /* Thoughts */ = {
 			isa = PBXGroup;
 			children = (
+				1F7CDCC127FE062800369248 /* Info.plist */,
+				1F38294527FEF25E00288945 /* GoogleService-Info.plist */,
 				1F7CDCCB27FE09FD00369248 /* Resources */,
 				1F7CDCCA27FE09F200369248 /* Managers */,
 				1F7CDCC927FE09EB00369248 /* Controllers */,
 				1F7CDCC727FE09D900369248 /* Views */,
 				1F7CDCC827FE09E100369248 /* Models */,
-				1F7CDCC127FE062800369248 /* Info.plist */,
 			);
 			path = Thoughts;
 			sourceTree = "<group>";
@@ -102,6 +109,8 @@
 		1F7CDCC827FE09E100369248 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1F38294727FEFD3200288945 /* User.swift */,
+				1F38294927FEFD4E00288945 /* BlogPost.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,8 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				1F7CDCDA27FE1ABB00369248 /* IAPManager.swift */,
-				1F7CDCDC27FE1ACF00369248 /* AuthManager.swift */,
 				1F7CDCD827FE1A9B00369248 /* DatabaseManager.swift */,
+				1F7CDCDC27FE1ACF00369248 /* AuthManager.swift */,
 				1F7CDCDE27FE1AEA00369248 /* StorageManager.swift */,
 			);
 			path = Managers;
@@ -179,7 +188,6 @@
 				DA8E4F2A58E846B02B0205E2 /* Pods-Thoughts.debug.xcconfig */,
 				0E4AFEDDAA59B34E9B601E30 /* Pods-Thoughts.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -245,6 +253,7 @@
 			files = (
 				1F7CDCC027FE062800369248 /* LaunchScreen.storyboard in Resources */,
 				1F7CDCBD27FE062800369248 /* Assets.xcassets in Resources */,
+				1F38294627FEF25E00288945 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,12 +306,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F38294A27FEFD4E00288945 /* BlogPost.swift in Sources */,
 				1F7CDCB827FE062700369248 /* HomeViewController.swift in Sources */,
 				1F7CDCDD27FE1ACF00369248 /* AuthManager.swift in Sources */,
 				1F7CDCD327FE0C5A00369248 /* SignUpViewController.swift in Sources */,
 				1F7CDCDB27FE1ABB00369248 /* IAPManager.swift in Sources */,
 				1F7CDCD927FE1A9B00369248 /* DatabaseManager.swift in Sources */,
 				1F7CDCB427FE062700369248 /* AppDelegate.swift in Sources */,
+				1F38294827FEFD3200288945 /* User.swift in Sources */,
 				1F7CDCD127FE0C2E00369248 /* SignInViewController.swift in Sources */,
 				1F7CDCCD27FE0B5F00369248 /* ProfileViewController.swift in Sources */,
 				1F7CDCD727FE0C9D00369248 /* CreateNewPostViewController.swift in Sources */,
