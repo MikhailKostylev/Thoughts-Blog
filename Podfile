@@ -10,6 +10,6 @@ target 'Thoughts' do
   pod 'Firebase/Storage'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
-  pod 'Purchases'
+  pod 'WhatsNewKit'
 
 end

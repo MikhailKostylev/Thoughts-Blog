@@ -22,9 +22,10 @@
 		1F7CDCD527FE0C8000369248 /* ViewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCD427FE0C8000369248 /* ViewPostViewController.swift */; };
 		1F7CDCD727FE0C9D00369248 /* CreateNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCD627FE0C9D00369248 /* CreateNewPostViewController.swift */; };
 		1F7CDCD927FE1A9B00369248 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCD827FE1A9B00369248 /* DatabaseManager.swift */; };
-		1F7CDCDB27FE1ABB00369248 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCDA27FE1ABB00369248 /* IAPManager.swift */; };
 		1F7CDCDD27FE1ACF00369248 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCDC27FE1ACF00369248 /* AuthManager.swift */; };
 		1F7CDCDF27FE1AEA00369248 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7CDCDE27FE1AEA00369248 /* StorageManager.swift */; };
+		1FD1DC2A28007F5B002462AC /* UserDefaults+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD1DC2928007F5B002462AC /* UserDefaults+extensions.swift */; };
+		1FD1DC2C280098B4002462AC /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD1DC2B280098B4002462AC /* UIView+extensions.swift */; };
 		BDA312B79E76A4C4DC6AC973 /* Pods_Thoughts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6565A11C74CDD5B72A186907 /* Pods_Thoughts.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,9 +48,10 @@
 		1F7CDCD427FE0C8000369248 /* ViewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPostViewController.swift; sourceTree = "<group>"; };
 		1F7CDCD627FE0C9D00369248 /* CreateNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPostViewController.swift; sourceTree = "<group>"; };
 		1F7CDCD827FE1A9B00369248 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
-		1F7CDCDA27FE1ABB00369248 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		1F7CDCDC27FE1ACF00369248 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		1F7CDCDE27FE1AEA00369248 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		1FD1DC2928007F5B002462AC /* UserDefaults+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+extensions.swift"; sourceTree = "<group>"; };
+		1FD1DC2B280098B4002462AC /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
 		6565A11C74CDD5B72A186907 /* Pods_Thoughts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thoughts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8E4F2A58E846B02B0205E2 /* Pods-Thoughts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughts.debug.xcconfig"; path = "Target Support Files/Pods-Thoughts/Pods-Thoughts.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,7 +130,6 @@
 		1F7CDCCA27FE09F200369248 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				1F7CDCDA27FE1ABB00369248 /* IAPManager.swift */,
 				1F7CDCD827FE1A9B00369248 /* DatabaseManager.swift */,
 				1F7CDCDC27FE1ACF00369248 /* AuthManager.swift */,
 				1F7CDCDE27FE1AEA00369248 /* StorageManager.swift */,
@@ -142,6 +143,7 @@
 				1F7CDCB327FE062700369248 /* AppDelegate.swift */,
 				1F7CDCB527FE062700369248 /* SceneDelegate.swift */,
 				1F7CDCBC27FE062800369248 /* Assets.xcassets */,
+				1FD1DC2828007F41002462AC /* Extensions */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -172,6 +174,15 @@
 				1F7CDCD627FE0C9D00369248 /* CreateNewPostViewController.swift */,
 			);
 			path = Posts;
+			sourceTree = "<group>";
+		};
+		1FD1DC2828007F41002462AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1FD1DC2928007F5B002462AC /* UserDefaults+extensions.swift */,
+				1FD1DC2B280098B4002462AC /* UIView+extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8C41DA0C041D861F0EDECB30 /* Frameworks */ = {
@@ -310,14 +321,15 @@
 				1F7CDCB827FE062700369248 /* HomeViewController.swift in Sources */,
 				1F7CDCDD27FE1ACF00369248 /* AuthManager.swift in Sources */,
 				1F7CDCD327FE0C5A00369248 /* SignUpViewController.swift in Sources */,
-				1F7CDCDB27FE1ABB00369248 /* IAPManager.swift in Sources */,
 				1F7CDCD927FE1A9B00369248 /* DatabaseManager.swift in Sources */,
 				1F7CDCB427FE062700369248 /* AppDelegate.swift in Sources */,
+				1FD1DC2C280098B4002462AC /* UIView+extensions.swift in Sources */,
 				1F38294827FEFD3200288945 /* User.swift in Sources */,
 				1F7CDCD127FE0C2E00369248 /* SignInViewController.swift in Sources */,
 				1F7CDCCD27FE0B5F00369248 /* ProfileViewController.swift in Sources */,
 				1F7CDCD727FE0C9D00369248 /* CreateNewPostViewController.swift in Sources */,
 				1F7CDCCF27FE0BFB00369248 /* TabBarViewController.swift in Sources */,
+				1FD1DC2A28007F5B002462AC /* UserDefaults+extensions.swift in Sources */,
 				1F7CDCB627FE062700369248 /* SceneDelegate.swift in Sources */,
 				1F7CDCD527FE0C8000369248 /* ViewPostViewController.swift in Sources */,
 				1F7CDCDF27FE1AEA00369248 /* StorageManager.swift in Sources */,
