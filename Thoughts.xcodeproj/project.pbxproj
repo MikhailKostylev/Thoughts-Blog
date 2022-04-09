@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F32F5102802203900A0BC0E /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32F50F2802203900A0BC0E /* SignInHeaderView.swift */; };
 		1F38294627FEF25E00288945 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F38294527FEF25E00288945 /* GoogleService-Info.plist */; };
 		1F38294827FEFD3200288945 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38294727FEFD3200288945 /* User.swift */; };
 		1F38294A27FEFD4E00288945 /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38294927FEFD4E00288945 /* BlogPost.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		0E4AFEDDAA59B34E9B601E30 /* Pods-Thoughts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughts.release.xcconfig"; path = "Target Support Files/Pods-Thoughts/Pods-Thoughts.release.xcconfig"; sourceTree = "<group>"; };
+		1F32F50F2802203900A0BC0E /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		1F38294527FEF25E00288945 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1F38294727FEFD3200288945 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1F38294927FEFD4E00288945 /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		1F7CDCC727FE09D900369248 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F32F50F2802203900A0BC0E /* SignInHeaderView.swift */,
 				1F7CDCBE27FE062800369248 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
@@ -323,6 +326,7 @@
 				1F7CDCD327FE0C5A00369248 /* SignUpViewController.swift in Sources */,
 				1F7CDCD927FE1A9B00369248 /* DatabaseManager.swift in Sources */,
 				1F7CDCB427FE062700369248 /* AppDelegate.swift in Sources */,
+				1F32F5102802203900A0BC0E /* SignInHeaderView.swift in Sources */,
 				1FD1DC2C280098B4002462AC /* UIView+extensions.swift in Sources */,
 				1F38294827FEFD3200288945 /* User.swift in Sources */,
 				1F7CDCD127FE0C2E00369248 /* SignInViewController.swift in Sources */,
