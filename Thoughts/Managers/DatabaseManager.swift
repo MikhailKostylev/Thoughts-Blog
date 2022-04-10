@@ -57,4 +57,50 @@ final class DatabaseManager {
                 completion(error == nil)
             }
     }
+    
+    public func getUser(
+        email: String,
+        completion: @escaping (User?) -> Void) {
+            let documentId = email
+                .replacingOccurrences(of: ".", with: "_")
+                .replacingOccurrences(of: "@", with: "_")
+            
+            database
+                .collection("users")
+                .document(documentId)
+                .getDocument { snapshot, error in
+                    guard let data = snapshot?.data() as? [String: Any],
+                          let name = data["name"] as? String,
+                          error == nil else { return }
+                    
+                    let ref = data["profile_photo"] as? String
+                    let user = User(name: name, email: email, profilePictureRef: ref)
+                    completion(user)
+                }
+        }
+    
+    public func updateProfilePhoto(
+        email: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        let path = email
+            .replacingOccurrences(of: "@", with: "_")
+            .replacingOccurrences(of: ".", with: "_")
+        
+        let photoReference = "profile_pictures/\(path)/photo.png"
+        
+        let databaseReference = database
+            .collection("users")
+            .document(path)
+        
+        databaseReference.getDocument { snapshot, error in
+            guard var data = snapshot?.data(),
+                  error == nil else { return }
+            data["profile_photo"] = photoReference
+            
+            databaseReference.setData(data) { error in
+                completion(error == nil)
+            }
+        }
+    }
 }

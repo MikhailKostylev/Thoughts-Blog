@@ -33,4 +33,14 @@ extension UIView {
     public var right: CGFloat {
         return frame.size.width + frame.origin.x
     }
+    
+    func addGradient() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.systemBlue.cgColor, UIColor.systemBackground.cgColor]
+        gradient.opacity = 1
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradient.frame = self.bounds
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }
