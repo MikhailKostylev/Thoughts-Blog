@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupSignOutButton()
         setupTable()
-        fetchProfileData()
+        fetchPosts()
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,13 +57,22 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupTable() {
-        let backview = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.height))
-        backview.addGradient()
-        tableView.backgroundView = backview
+        let gradientView = UIView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: view.width,
+                height: view.height
+            )
+        )
+        
+        gradientView.addGradient()
+        tableView.backgroundView = gradientView
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         setupTableHeader()
+        fetchProfileData()
     }
     
     private func setupTableHeader(
@@ -192,7 +201,13 @@ class ProfileViewController: UIViewController {
     }
     
     private func fetchPosts() {
-        
+        DatabaseManager.shared.getPosts(for: currentEmail) { [weak self] posts in
+            self?.posts = posts
+            
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 }
 
@@ -200,14 +215,14 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let post = posts[indexPath.row]
+        let post = posts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .clear
-        cell.textLabel?.text = "Coming Soon.."
+        cell.textLabel?.text = post.title
         return cell
     }
     
