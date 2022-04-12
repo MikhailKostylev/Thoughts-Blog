@@ -20,18 +20,28 @@ class HomeViewController: UIViewController {
         button.layer.shadowColor = UIColor.label.cgColor
         button.layer.shadowOpacity = 0.4
         button.layer.shadowRadius = 10
+        button.layer.shadowOffset = CGSize(width: -3, height: 3)
         return button
     }()
+    
+    private let tableView: UITableView = {
+        let table = UITableView()
+        table.register(PostPreviewCell.self,
+                       forCellReuseIdentifier: PostPreviewCell.identifier)
+        return table
+    }()
+    
+    private var posts: [BlogPost] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        view.addSubview(tableView)
         view.addSubview(composeButton)
-        composeButton.addTarget(
-            self,
-            action: #selector(didTapCompose),
-            for: .touchUpInside
-        )
+        composeButton.addTarget(self, action: #selector(didTapCompose), for: .touchUpInside)
+        tableView.delegate = self
+        tableView.dataSource = self
+        fetchAllPosts()
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,6 +52,7 @@ class HomeViewController: UIViewController {
             width: 60,
             height: 60
         )
+        tableView.frame = view.bounds
     }
 
     @objc private func didTapCompose() {
@@ -50,5 +61,41 @@ class HomeViewController: UIViewController {
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
     }
+    
+    //MARK: Fetch Home Feed
+    private func fetchAllPosts() {
+        DatabaseManager.shared.getAllPosts { [weak self] posts in
+            self?.posts = posts
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
 }
 
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let post = posts[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostPreviewCell.identifier, for: indexPath) as? PostPreviewCell else { return UITableViewCell() }
+        cell.backgroundColor = .clear
+        cell.configure(with: .init(title: post.title, imageUrl: post.headerImageUrl))
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let vc = ViewPostViewController(post: posts[indexPath.row])
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.title = "Post"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
