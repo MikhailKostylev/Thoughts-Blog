@@ -98,6 +98,8 @@ class SignInViewController: UIViewController {
             return
         }
         
+        HapticsManager.shared.vibrateForSelection()
+        
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
             guard success else { return }
             UserDefaults.standard.set(email, forKey: "email")

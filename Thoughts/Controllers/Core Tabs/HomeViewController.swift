@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
     }()
     
     private var posts: [BlogPost] = []
+    private var postObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,17 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         fetchAllPosts()
+        postObserver = NotificationCenter.default.addObserver(
+            forName: Notification.Name("post"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let stongSelf = self else {
+                return
+            }
+            
+            stongSelf.tableView.reloadData()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,8 +66,15 @@ class HomeViewController: UIViewController {
         )
         tableView.frame = view.bounds
     }
+    
+    deinit {
+        if let observer = postObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
 
     @objc private func didTapCompose() {
+        HapticsManager.shared.vibrateForSelection()
         let vc = CreateNewPostViewController()
         vc.title = "Create Post"
         let navVC = UINavigationController(rootViewController: vc)
@@ -93,6 +112,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        HapticsManager.shared.vibrateForSelection()
+        
         let vc = ViewPostViewController(post: posts[indexPath.row])
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = "Post"

@@ -14,6 +14,7 @@ class CreateNewPostViewController: UIViewController {
         field.autocapitalizationType = .sentences
         field.autocorrectionType = .yes
         field.returnKeyType = .done
+        field.font = .systemFont(ofSize: 24)
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
@@ -38,14 +39,21 @@ class CreateNewPostViewController: UIViewController {
     private let textView: UITextView = {
         let textView = UITextView()
         textView.isEditable = true
-        textView.font = .systemFont(ofSize: 28)
         textView.backgroundColor = .secondarySystemBackground
         textView.autocapitalizationType = .sentences
         textView.autocorrectionType = .yes
+        textView.font = .systemFont(ofSize: 20)
         textView.layer.cornerRadius = 12
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.lightGray.cgColor
         return textView
+    }()
+    
+    let loadingSpinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.hidesWhenStopped = true
+        return spinner
     }()
     
     private var selectedHeaderImage: UIImage?
@@ -56,6 +64,7 @@ class CreateNewPostViewController: UIViewController {
         view.addSubview(headerImageView)
         view.addSubview(titleField)
         view.addSubview(textView )
+        view.addSubview(loadingSpinner)
         configureBarButtons()
         
         let tap = UITapGestureRecognizer(
@@ -84,6 +93,8 @@ class CreateNewPostViewController: UIViewController {
             width:  view.width-20,
             height: view.height-300-view.safeAreaInsets.top
         )
+        loadingSpinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadingSpinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     private func configureBarButtons() {
@@ -121,7 +132,9 @@ class CreateNewPostViewController: UIViewController {
               !title.trimmingCharacters(in: .whitespaces).isEmpty,
               !body.trimmingCharacters(in: .whitespaces).isEmpty
         else {
-            
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
             let alert = UIAlertController(
                 title: "Enter Post Details",
                 message: "Please enter a title, body and select image to continue.",
@@ -131,9 +144,9 @@ class CreateNewPostViewController: UIViewController {
             return
         }
         
-        let newPostId = UUID().uuidString
+        loadingSpinner.startAnimating()
         
-        print("Staring post...")
+        let newPostId = UUID().uuidString
         
         // Upload Header Image
         StorageManager.shared.uploadBlogHeaderImage(
@@ -141,13 +154,21 @@ class CreateNewPostViewController: UIViewController {
             image: headerImage,
             postId: newPostId
         ) { success in
-            guard success else { return }
+            guard success else {
+                DispatchQueue.main.async {
+                    HapticsManager.shared.vibrate(for: .error)
+                }
+                return
+            }
             
             StorageManager.shared.downloadUrlForPostHeader(
                 email: email,
                 postId: newPostId
             ) { url in
                 guard let headerUrl = url else {
+                    DispatchQueue.main.async {
+                        HapticsManager.shared.vibrate(for: .error)
+                    }
                     print("Failde to upload url for header")
                     return
                 }
@@ -165,11 +186,18 @@ class CreateNewPostViewController: UIViewController {
                     email: email
                 ) { [weak self] posted in
                     guard posted else {
+                        DispatchQueue.main.async {
+                            HapticsManager.shared.vibrate(for: .error)
+                        }
                         print("Failed to post new Blog Article")
                         return
                     }
                     
+                    NotificationCenter.default.post(name: Notification.Name("post"), object: nil)
+                    
                     DispatchQueue.main.async {
+                        self?.loadingSpinner.stopAnimating()
+                        HapticsManager.shared.vibrate(for: .success)
                         self?.didTapCancel()
                     }
                 }

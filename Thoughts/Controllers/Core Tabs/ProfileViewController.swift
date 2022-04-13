@@ -119,15 +119,12 @@ class ProfileViewController: UIViewController {
             if let name = name {
                 title = name
             }
-            
             if let ref = profilePhotoRef {
                 // Fetch Image
                 StorageManager.shared.downloadUrlForProfilePicture(path: ref) { url in
                     guard let url = url else { return }
-                    
                     let _ = URLSession.shared.dataTask(with: url) { data, _, error in
                         guard let data = data, error == nil else { return }
-                        
                         DispatchQueue.main.async {
                             profilePhoto.image = UIImage(data: data)
                         }
@@ -152,6 +149,9 @@ class ProfileViewController: UIViewController {
     
     /// Sign Out
     @objc private func didTapSignOut() {
+        DispatchQueue.main.async {
+            HapticsManager.shared.vibrate(for: .warning)
+        }
         let alert = UIAlertController(
             title: "Sign Out",
             message: "Are you sure you'd like to sign out?",
@@ -191,7 +191,6 @@ class ProfileViewController: UIViewController {
         DatabaseManager.shared.getUser(email: currentEmail) { [weak self] user in
             guard let user = user else { return }
             self?.user = user
-            
             DispatchQueue.main.async {
                 self?.setupTableHeader(
                     profilePhotoRef: user.profilePictureRef,
@@ -232,6 +231,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        HapticsManager.shared.vibrateForSelection()
+        
         let vc = ViewPostViewController(post: posts[indexPath.row])
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = "Post"
@@ -259,6 +261,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
                     guard updated  else { return }
                     DispatchQueue.main.async {
                         strongSelf.fetchProfileData()
+                        HapticsManager.shared.vibrate(for: .success)
                     }
                 }
             }

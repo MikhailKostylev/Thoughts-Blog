@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0E0FAC280708840007947C /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E0FAB280708840007947C /* HapticsManager.swift */; };
 		1F32F5102802203900A0BC0E /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F32F50F2802203900A0BC0E /* SignInHeaderView.swift */; };
 		1F38294627FEF25E00288945 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F38294527FEF25E00288945 /* GoogleService-Info.plist */; };
 		1F38294827FEFD3200288945 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38294727FEFD3200288945 /* User.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		0E4AFEDDAA59B34E9B601E30 /* Pods-Thoughts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughts.release.xcconfig"; path = "Target Support Files/Pods-Thoughts/Pods-Thoughts.release.xcconfig"; sourceTree = "<group>"; };
+		1F0E0FAB280708840007947C /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		1F32F50F2802203900A0BC0E /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		1F38294527FEF25E00288945 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1F38294727FEFD3200288945 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -138,9 +140,10 @@
 		1F7CDCCA27FE09F200369248 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				1F7CDCD827FE1A9B00369248 /* DatabaseManager.swift */,
 				1F7CDCDC27FE1ACF00369248 /* AuthManager.swift */,
+				1F7CDCD827FE1A9B00369248 /* DatabaseManager.swift */,
 				1F7CDCDE27FE1AEA00369248 /* StorageManager.swift */,
+				1F0E0FAB280708840007947C /* HapticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -187,8 +190,8 @@
 		1F8EDEC82805921200D96E43 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				1F8EDEC92805926A00D96E43 /* PostPreviewCell.swift */,
 				1F8EDECB2805928700D96E43 /* PostHeaderCell.swift */,
+				1F8EDEC92805926A00D96E43 /* PostPreviewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				1FD1DC2A28007F5B002462AC /* UserDefaults+extensions.swift in Sources */,
 				1F7CDCB627FE062700369248 /* SceneDelegate.swift in Sources */,
 				1F7CDCD527FE0C8000369248 /* ViewPostViewController.swift in Sources */,
+				1F0E0FAC280708840007947C /* HapticsManager.swift in Sources */,
 				1F7CDCDF27FE1AEA00369248 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
