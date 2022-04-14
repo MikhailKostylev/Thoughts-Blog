@@ -15,7 +15,7 @@ class SignInViewController: UIViewController {
         let field = UITextField()
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
-        field.returnKeyType = .continue
+        field.returnKeyType = .next
         field.keyboardType = .emailAddress
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
@@ -81,6 +81,11 @@ class SignInViewController: UIViewController {
         
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
         createAccountButton.addTarget(self, action: #selector(didTapCreateAccount), for: .touchUpInside)
+        
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,21 +98,31 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func didTapSignIn() {
+        emailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+        
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
             return
         }
         
-        HapticsManager.shared.vibrateForSelection()
-        
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success in
-            guard success else { return }
+            guard let strongSelf = self else { return }
+            guard success else {
+                Alert.showBasic(title: "Incorrect Email or Password", message: "Please check your details and try again", vc: strongSelf, view: strongSelf.view)
+                DispatchQueue.main.async {
+                    HapticsManager.shared.vibrate(for: .error)
+                }
+                print("Failed to log in")
+                return
+            }
+            
             UserDefaults.standard.set(email, forKey: "email")
             
             DispatchQueue.main.async {
                 let vc = TabBarViewController()
                 vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true)
+                strongSelf.present(vc, animated: true)
             }
         }
     }
@@ -117,5 +132,21 @@ class SignInViewController: UIViewController {
         vc.title = "Create Account"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+//MARK: - Textfield Delegate
+extension SignInViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        }
+        else if textField == passwordField {
+            didTapSignIn()
+        }
+        
+        return true
     }
 }

@@ -13,9 +13,9 @@ class SignUpViewController: UIViewController {
 
     private let nameField: UITextField = {
         let field = UITextField()
-        field.autocapitalizationType = .none
+        field.autocapitalizationType = .words
         field.autocorrectionType = .no
-        field.returnKeyType = .continue
+        field.returnKeyType = .next
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
@@ -30,7 +30,7 @@ class SignUpViewController: UIViewController {
         let field = UITextField()
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
-        field.returnKeyType = .continue
+        field.returnKeyType = .next
         field.keyboardType = .emailAddress
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
@@ -82,6 +82,12 @@ class SignUpViewController: UIViewController {
         view.addSubview(signUpButton)
         
         signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
+        
+        nameField.delegate = self
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,14 +100,17 @@ class SignUpViewController: UIViewController {
     }
     
     @objc private func didTapSignUp() {
+        nameField.resignFirstResponder()
+        emailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+        
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty,
               let name = nameField.text, !name.isEmpty else { return }
-        
-        HapticsManager.shared.vibrateForSelection()
-        
+                
         // Create user
         AuthManager.shared.signUp(email: email, password: password) { [weak self] success in
+            guard let strongSelf = self else { return }
             if success {
                 // Update database
                 let newUser = User(name: name,  email: email, profilePictureRef: nil)
@@ -114,13 +123,35 @@ class SignUpViewController: UIViewController {
                     DispatchQueue.main.async {
                         let vc = TabBarViewController()
                         vc.modalPresentationStyle = .fullScreen
-                        self?.present(vc, animated: true)
+                        strongSelf.present(vc, animated: true)
                     }
                 }
             } else {
+                Alert.showBasic(title: "Oops!", message: "Looks like a user account for this email address already exists or check your details and try again please", vc: strongSelf, view: strongSelf.view)
+                DispatchQueue.main.async {
+                    HapticsManager.shared.vibrate(for: .error)
+                }
                 print("Failde to create account")
-                //TODO: - create an alert
             }
         }
+    }
+}
+
+//MARK: - Textfield Delegate
+extension SignUpViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == nameField {
+            emailField.becomeFirstResponder()
+        }
+        else if textField == emailField {
+            passwordField.becomeFirstResponder()
+        }
+        else if textField == passwordField {
+            didTapSignUp()
+        }
+        
+        return true
     }
 }

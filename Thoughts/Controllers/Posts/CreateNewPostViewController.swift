@@ -158,6 +158,7 @@ class CreateNewPostViewController: UIViewController {
                 DispatchQueue.main.async {
                     HapticsManager.shared.vibrate(for: .error)
                 }
+                print("Failde to upload url for header")
                 return
             }
             
@@ -169,7 +170,7 @@ class CreateNewPostViewController: UIViewController {
                     DispatchQueue.main.async {
                         HapticsManager.shared.vibrate(for: .error)
                     }
-                    print("Failde to upload url for header")
+                    print("Failde to download url for header")
                     return
                 }
                 

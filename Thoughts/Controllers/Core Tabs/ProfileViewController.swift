@@ -107,7 +107,7 @@ class ProfileViewController: UIViewController {
             // Email label
             let emailLabel = UILabel(frame: CGRect(
                 x: 20,
-                y: profilePhoto.bottom-30,
+                y: profilePhoto.bottom-20,
                 width: view.width-40,
                 height: 100))
             emailLabel.text = currentEmail

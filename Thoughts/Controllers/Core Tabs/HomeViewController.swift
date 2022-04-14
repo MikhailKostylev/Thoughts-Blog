@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
                 return
             }
             
-            stongSelf.tableView.reloadData()
+            stongSelf.fetchAllPosts()
         }
     }
     
