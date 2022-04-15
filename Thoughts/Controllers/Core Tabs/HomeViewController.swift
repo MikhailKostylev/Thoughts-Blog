@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
                                 withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium)),
                         for: .normal)
         button.layer.cornerRadius = 30
-        button.layer.shadowColor = UIColor.label.cgColor
+        button.layer.shadowColor = UIColor.systemBlue.cgColor
         button.layer.shadowOpacity = 0.4
         button.layer.shadowRadius = 10
         button.layer.shadowOffset = CGSize(width: -3, height: 3)
@@ -81,6 +81,7 @@ class HomeViewController: UIViewController {
         HapticsManager.shared.vibrateForSelection()
         let vc = CreateNewPostViewController()
         vc.title = "Create Post"
+        vc.modalPresentationStyle = .fullScreen
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
     }

@@ -33,7 +33,7 @@ class CreateNewPostViewController: UIViewController {
         imageView.layer.masksToBounds = true
         imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(systemName: "photo")
-        imageView.backgroundColor = .tertiarySystemBackground
+        imageView.backgroundColor = .systemBackground
         return imageView
     }()
     

@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController {
     private let currentEmail: String
     private var user: User?
     private var posts: [BlogPost] = []
+    private var postObserver: NSObjectProtocol?
+
     
     //MARK: - Init
     init(currentEmail: String) {
@@ -40,11 +42,29 @@ class ProfileViewController: UIViewController {
         setupSignOutButton()
         setupTable()
         fetchPosts()
+        
+        postObserver = NotificationCenter.default.addObserver(
+            forName: Notification.Name("post"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let stongSelf = self else {
+                return
+            }
+            
+            stongSelf.fetchPosts()
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+    }
+    
+    deinit {
+        if let observer = postObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     //MARK: - Setup UI elements
