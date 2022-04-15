@@ -16,6 +16,7 @@ final class StorageManager {
     
     private init() {}
     
+    /// Upload user profile picture
     public func uploadUserProfilePicture(
         email: String,
         image: UIImage?,
@@ -39,6 +40,7 @@ final class StorageManager {
             }
     }
     
+    /// Download url for profile picture
     public func downloadUrlForProfilePicture(
         path: String,
         completion: @escaping (URL?) -> Void
@@ -49,6 +51,7 @@ final class StorageManager {
             }
     }
     
+    /// Upload blog header image
     public func uploadBlogHeaderImage(
         email: String,
         image: UIImage,
@@ -73,6 +76,7 @@ final class StorageManager {
             }
     }
     
+    /// Download url for post header
     public func downloadUrlForPostHeader(
         email: String,
         postId: String,

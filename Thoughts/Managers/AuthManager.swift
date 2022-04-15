@@ -20,6 +20,7 @@ final class AuthManager {
         return auth.currentUser != nil
     }
     
+    /// Sign Up
     public func signUp(
         email: String,
         password: String,
@@ -39,6 +40,7 @@ final class AuthManager {
         }
     }
     
+    /// Sign In
     public func signIn(
         email: String,
         password: String,
@@ -57,6 +59,7 @@ final class AuthManager {
         }
     }
     
+    /// Sign Out
     public func signOut(
         completion: (Bool) -> Void
     ) {

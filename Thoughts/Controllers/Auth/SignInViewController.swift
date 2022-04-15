@@ -9,6 +9,7 @@ import UIKit
 
 class SignInViewController: UIViewController {
     
+    //MARK: - UI elements
     private let headerView = SignInHeaderView( )
 
     private let emailField: UITextField = {
@@ -69,6 +70,7 @@ class SignInViewController: UIViewController {
         return button
     }()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Sign In"
@@ -97,6 +99,7 @@ class SignInViewController: UIViewController {
         createAccountButton .frame = CGRect(x: 20, y: signInButton.bottom+40, width: view.width-40, height: 50)
     }
     
+    //MARK: - Action methods
     @objc private func didTapSignIn() {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()

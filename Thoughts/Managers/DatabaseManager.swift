@@ -16,6 +16,7 @@ final class DatabaseManager {
     
     private init() {}
     
+    /// Insert Post
     public func insert(
         blogPost: BlogPost,
         email: String ,
@@ -43,6 +44,7 @@ final class DatabaseManager {
             }
     }
     
+    // Get all posts of all users
     public func getAllPosts(
         completion: @escaping ([BlogPost]) -> Void
     ) {
@@ -81,6 +83,7 @@ final class DatabaseManager {
             }
     }
     
+    /// Get all posts for current user
     public func getPosts(
         for email: String,
         completion: @escaping ([BlogPost]) -> Void
@@ -121,6 +124,7 @@ final class DatabaseManager {
             }
     }
     
+    /// Insert User
     public func insert(
         user: User,
         completion: @escaping (Bool) -> Void
@@ -142,6 +146,7 @@ final class DatabaseManager {
             }
     }
     
+    /// Get user for current email
     public func getUser(
         email: String,
         completion: @escaping (User?) -> Void) {
@@ -163,6 +168,7 @@ final class DatabaseManager {
                 }
         }
     
+    /// Update photo profile for current user email
     public func updateProfilePhoto(
         email: String,
         completion: @escaping (Bool) -> Void

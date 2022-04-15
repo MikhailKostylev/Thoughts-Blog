@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    //MARK: - let/var
+    //MARK: - UI elements
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(PostPreviewCell.self,
@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
         return table
     }()
     
+    //MARK: - let/var
     private let currentEmail: String
     private var user: User?
     private var posts: [BlogPost] = []
@@ -133,7 +134,7 @@ class ProfileViewController: UIViewController {
             }
         }
     
-    //MARK: - Actions
+    //MARK: - Actions methods
     @objc private func didTapProfilePhoto() {
         guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String,
               myEmail == currentEmail else {
@@ -186,7 +187,7 @@ class ProfileViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Fetching data
+    //MARK: - Fetching data
     private func fetchProfileData() {
         DatabaseManager.shared.getUser(email: currentEmail) { [weak self] user in
             guard let user = user else { return }

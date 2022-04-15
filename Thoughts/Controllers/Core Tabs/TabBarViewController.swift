@@ -10,6 +10,7 @@ import WhatsNewKit
 
 class TabBarViewController: UITabBarController {
     
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpControllers()
@@ -21,6 +22,7 @@ class TabBarViewController: UITabBarController {
         UserDefaults.setAppWasLaunched()
     }
     
+    //MARK: - Setup Tab Bar
     private func setUpControllers() {
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
             return
@@ -47,6 +49,7 @@ class TabBarViewController: UITabBarController {
         setViewControllers([navHomeVC, navProfileVC], animated: true)
     }
     
+    //MARK: - Present What's new screen
     func showWhatsNew() {
         let whatsNew = WhatsNew(title: "What's New",
                                 items: [

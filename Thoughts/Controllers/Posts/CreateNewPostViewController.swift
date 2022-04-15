@@ -9,6 +9,7 @@ import UIKit
 
 class CreateNewPostViewController: UIViewController {
     
+    //MARK: - UI elements
     private let titleField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .sentences
@@ -58,6 +59,7 @@ class CreateNewPostViewController: UIViewController {
     
     private var selectedHeaderImage: UIImage?
 
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -112,6 +114,7 @@ class CreateNewPostViewController: UIViewController {
         )
     }
     
+    //MARK: - Action methods
     @objc private func didTapHeader() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -207,6 +210,7 @@ class CreateNewPostViewController: UIViewController {
     }
 }
 
+//MARK: - Image Picker
 extension CreateNewPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)

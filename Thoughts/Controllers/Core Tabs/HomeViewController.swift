@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    //MARK: - UI elements
     private let composeButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
@@ -31,9 +32,11 @@ class HomeViewController: UIViewController {
         return table
     }()
     
+    //MARK: - let/var
     private var posts: [BlogPost] = []
     private var postObserver: NSObjectProtocol?
 
+    //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -72,7 +75,8 @@ class HomeViewController: UIViewController {
             NotificationCenter.default.removeObserver(observer)
         }
     }
-
+    
+    //MARK: - Action methods
     @objc private func didTapCompose() {
         HapticsManager.shared.vibrateForSelection()
         let vc = CreateNewPostViewController()
@@ -92,6 +96,7 @@ class HomeViewController: UIViewController {
     }
 }
 
+//MARK: - Table methods
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
