@@ -21,4 +21,6 @@ Firebase Firestore, a document collection based database, is used to save data o
 
 ![imgonline-com-ua-2to1-7GK0n45xxSZ0](https://user-images.githubusercontent.com/100859587/163654424-1b62618f-f6f2-43c1-b0ff-0dd0995078aa.jpg)
 
+Dark mode support
+
 ![imgonline-com-ua-2to1-KOBOaylLpyFl](https://user-images.githubusercontent.com/100859587/163654455-5ce713f4-0de7-405e-b0b1-a3340f8461e7.jpg)
