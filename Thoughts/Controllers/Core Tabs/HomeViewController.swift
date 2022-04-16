@@ -42,6 +42,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         view.addSubview(composeButton)
+        setupSignOutButton()
         composeButton.addTarget(self, action: #selector(didTapCompose), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
@@ -74,6 +75,16 @@ class HomeViewController: UIViewController {
         if let observer = postObserver {
             NotificationCenter.default.removeObserver(observer)
         }
+    }
+    
+    //MARK: - Setup UI elements
+    private func setupSignOutButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "plus"),
+            style: .done,
+            target: self,
+            action: #selector(didTapCompose))
+        navigationItem.rightBarButtonItem?.tintColor = .systemBlue
     }
     
     //MARK: - Action methods
